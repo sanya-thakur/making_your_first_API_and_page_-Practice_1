@@ -32,27 +32,27 @@ Example Responses:
 
 Add the required logic below to complete the API.
 */
-app.get("/assistant/greet",(req,res)=>{
-  let name=req.query.name
-  let date= new Date().getDay();
+app.get("/assistant/greet", (req, res) => {
+  let user = req.query.name;
+  let today = new Date().getDay();
 
-  let obj={
-    welcomeMessage: `Hello, ${name}! Welcome to our assisntant app!`,
+  let obj = {
+    welcomeMessage: `Hello, ${user}! Welcome to our assistant app!`,
   };
 
-  if (date==1){
-    obj.dayMessage="Happy Monday! Start your week with energy!"
+  if (today === 1) {
+    obj.dayMessage = "Happy Monday! Start your week with energy!";
+  } else if (today === 5) {
+    obj.dayMessage = "It's Friday! The weekend is near!";
+  } else {
+    obj.dayMessage = "Have a wonderful day!";
   }
-  else if (date==5){
-    obj.dayMessage="It's Friday! The weekend is near!"
-  }
-  else{
-    obj.dayMessage="Have a wonderful day!"
-  }
+
   return res.send(obj);
-})
-app.get("/", function(req, res){
-  return res.send('<h1>Hello, World!</h1>')
+});
+
+app.get("/", (req, res) => {
+  return res.send("<h1>Hello, Visitor!</h1>");
 });
 
 const PORT = 3000;
